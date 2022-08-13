@@ -10,44 +10,46 @@ class TransactionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: transactions.map((eachTransaction) {
-        return Card(
-          //elevation: 5,
-          child: Row(
-            children: <Widget>[
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.purple, width: 2),
-                ),
-                padding: EdgeInsets.all(10),
-                margin: EdgeInsets.symmetric(vertical: 20, horizontal: 25),
-                child: Text(
-                  '\$${eachTransaction.amount.toString()}',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                    color: Colors.purple,
-                  ),
-                ),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+    return Container(
+        height: 620,
+        child: ListView(
+          children: transactions.map((eachTransaction) {
+            return Card(
+              //elevation: 5,
+              child: Row(
                 children: <Widget>[
-                  Text(
-                    eachTransaction.title,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.purple, width: 2),
+                    ),
+                    padding: EdgeInsets.all(10),
+                    margin: EdgeInsets.symmetric(vertical: 20, horizontal: 25),
+                    child: Text(
+                      '\$${eachTransaction.amount.toString()}',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        color: Colors.purple,
+                      ),
+                    ),
                   ),
-                  Text(
-                    DateFormat.yMMMMd().format(eachTransaction.date),
-                    style: TextStyle(color: Colors.black45),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        eachTransaction.title,
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                      ),
+                      Text(
+                        DateFormat.yMMMMd().format(eachTransaction.date),
+                        style: TextStyle(color: Colors.black45),
+                      )
+                    ],
                   )
                 ],
-              )
-            ],
-          ),
-        );
-      }).toList(),
-    );
+              ),
+            );
+          }).toList(),
+        ));
   }
 }
