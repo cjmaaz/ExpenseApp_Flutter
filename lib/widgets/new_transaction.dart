@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
-class NewTransaction extends StatelessWidget {
-  final titleController = TextEditingController();
-  final amountController = TextEditingController();
+class NewTransaction extends StatefulWidget {
   final void Function(String, double) addNew;
 
   NewTransaction(this.addNew);
+
+  @override
+  State<NewTransaction> createState() => _NewTransactionState();
+}
+
+class _NewTransactionState extends State<NewTransaction> {
+  final titleController = TextEditingController();
+
+  final amountController = TextEditingController();
 
   void submitData() {
     final enteredTitle = titleController.text;
@@ -14,8 +22,8 @@ class NewTransaction extends StatelessWidget {
     if (enteredTitle.isEmpty || enteredAmount <= 0) {
       return;
     }
-
-    addNew(enteredTitle, enteredAmount);
+    widget.addNew(enteredTitle, enteredAmount);
+    Navigator.of(context).pop();
   }
 
   @override
@@ -33,7 +41,7 @@ class NewTransaction extends StatelessWidget {
               //   titleInput = value;
               // },
               controller: titleController,
-              onSubmitted: (_) => submitData,
+              onSubmitted: (_) => submitData(),
             ),
             TextField(
               decoration: InputDecoration(labelText: 'Amount'),
@@ -42,7 +50,7 @@ class NewTransaction extends StatelessWidget {
               // },
               controller: amountController,
               keyboardType: TextInputType.numberWithOptions(decimal: true),
-              onSubmitted: (_) => submitData,
+              onSubmitted: (_) => submitData(),
             ),
             TextButton(
               onPressed: () {
@@ -53,7 +61,7 @@ class NewTransaction extends StatelessWidget {
                 submitData();
               },
               style: TextButton.styleFrom(
-                primary: Colors.purple,
+                primary: Theme.of(context).primaryColor,
               ),
               child: Text('Add Transaction'),
             )
