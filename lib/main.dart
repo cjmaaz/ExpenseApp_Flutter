@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Expense Manager',
+      debugShowCheckedModeBanner: false,
       home: MyHomePage(),
     );
   }
@@ -25,25 +26,32 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Expense Manager'),
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-            //mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Card(
-                elevation: 5,
-                child: Container(
-                  color: Colors.blue,
-                  width: double.infinity,
-                  child: Text('CHART!'),
-                ),
+      appBar: AppBar(
+        title: Text('Expense Manager'),
+        actions: <Widget>[IconButton(onPressed: () {}, icon: Icon(Icons.add))],
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          //mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Card(
+              elevation: 5,
+              child: Container(
+                color: Colors.blue,
+                width: double.infinity,
+                child: Text('CHART!'),
               ),
-              UserTransaction(),
-            ],
-          ),
-        ));
+            ),
+            UserTransaction(),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.add),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+    );
   }
 }
