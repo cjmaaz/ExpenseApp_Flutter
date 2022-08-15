@@ -14,7 +14,18 @@ class MyApp extends StatelessWidget {
       title: 'Expense Manager',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        textTheme: ThemeData.light().textTheme.copyWith(
+          titleMedium: const TextStyle(
+              fontFamily: 'Open Sans',
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            )
+          ),
         primarySwatch: Colors.purple,
+        fontFamily: 'Quicksand',
+        appBarTheme: const AppBarTheme(
+            titleTextStyle: TextStyle(fontFamily: 'Open Sans', fontSize: 20, fontWeight: FontWeight.bold,)
+          )
       ),
       home: MyHomePage(),
     );
@@ -28,9 +39,9 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _userTransactions = [
-    Transaction(id: 't1', title: 'New Shoes', amount: 4323.22, date: DateTime.now()),
-    Transaction(id: 't2', title: 'Weekly Groceries', amount: 623.22, date: DateTime.now()),
-    Transaction(id: 't3', title: 'Mariyam', amount: 623.22, date: DateTime.now()),
+    // Transaction(id: 't1', title: 'New Shoes', amount: 4323.22, date: DateTime.now()),
+    // Transaction(id: 't2', title: 'Weekly Groceries', amount: 623.22, date: DateTime.now()),
+    // Transaction(id: 't3', title: 'Mariyam', amount: 623.22, date: DateTime.now()),
   ];
 
   void _addNewTransaction(String txTitle, double txAmount) {
