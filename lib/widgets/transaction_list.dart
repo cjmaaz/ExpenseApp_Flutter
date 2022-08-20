@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:intl/intl.dart';
 
 import '../models/transaction.dart';
@@ -5,13 +7,14 @@ import 'package:flutter/material.dart';
 
 class TransactionList extends StatelessWidget {
   List<Transaction> transactions;
+  final void Function(String) _deleteTxn;
 
-  TransactionList(this.transactions);
+  TransactionList(this.transactions, this._deleteTxn);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 620,
+        height: 650,
         child: transactions.isEmpty
             ? Column(
                 children: <Widget>[
@@ -45,13 +48,20 @@ class TransactionList extends StatelessWidget {
                         ),
                         title: Text(
                           transactions[idx].title,
-                          style: Theme.of(context).textTheme.titleMedium,
+                          style: TextStyle(fontFamily: 'Quicksand'),
                         ),
                         subtitle: Text(
                             DateFormat.yMMMd().format(transactions[idx].date)),
-                      ));
+                        trailing: IconButton(
+                          onPressed: () => _deleteTxn(transactions[idx].id),
+                          icon: Icon(Icons.delete),
+                          color: Theme.of(context).errorColor,
+                        ),
+                      )
+                  );
                 },
                 itemCount: transactions.length,
-              ));
+            )
+    );
   }
 }
