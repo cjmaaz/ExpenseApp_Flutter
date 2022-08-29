@@ -49,71 +49,78 @@ class _NewTransactionState extends State<NewTransaction> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      child: Container(
-        padding: EdgeInsets.all(10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            TextField(
-              decoration: InputDecoration(labelText: 'Title'),
-              // onChanged: (value) {
-              //   titleInput = value;
-              // },
-              controller: _titleController,
-              onSubmitted: (_) => _submitData(),
-            ),
-            TextField(
-              decoration: InputDecoration(labelText: 'Amount'),
-              // onChanged: (val) {
-              //   amountInput = val;
-              // },
-              controller: _amountController,
-              keyboardType: TextInputType.numberWithOptions(decimal: true),
-              onSubmitted: (_) => _submitData(),
-            ),
-            Container(
-              height: 70,
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Text(
-                        _selectedDate == null ?
-                          'No Date Chosen' :
-                          'Picked Date: ${DateFormat.yMd().format(_selectedDate!)}' //Null Safety Hac
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: _presentDatePicker,
-                    child: Text(
-                      'Choose Date',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    style: TextButton.styleFrom(
-                      primary: Theme.of(context).primaryColor,
-                    ),
-                  )
-                ],
+    return SingleChildScrollView(
+      child: Card(
+        elevation: 5,
+        child: Container(
+          padding: EdgeInsets.only(
+              top: 10,
+              left: 10,
+              right: 10,
+              bottom: MediaQuery.of(context).viewInsets.bottom + 20,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              TextField(
+                decoration: InputDecoration(labelText: 'Title'),
+                // onChanged: (value) {
+                //   titleInput = value;
+                // },
+                controller: _titleController,
+                onSubmitted: (_) => _submitData(),
               ),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                // print(titleInput);
-                // print(amountInput);
-                print(_titleController.text);
-                print(_amountController.text);
-                _submitData();
-              },
-              style: TextButton.styleFrom(
-                primary: Colors.white,
+              TextField(
+                decoration: InputDecoration(labelText: 'Amount'),
+                // onChanged: (val) {
+                //   amountInput = val;
+                // },
+                controller: _amountController,
+                keyboardType: TextInputType.numberWithOptions(decimal: true),
+                onSubmitted: (_) => _submitData(),
               ),
-              child: Text(
-                'Add Transaction',
-                style: TextStyle(fontFamily: 'Quicksand'),
+              Container(
+                height: 70,
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(
+                          _selectedDate == null ?
+                            'No Date Chosen' :
+                            'Picked Date: ${DateFormat.yMd().format(_selectedDate!)}' //Null Safety Hac
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: _presentDatePicker,
+                      child: Text(
+                        'Choose Date',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      style: TextButton.styleFrom(
+                        primary: Theme.of(context).primaryColor,
+                      ),
+                    )
+                  ],
+                ),
               ),
-            )
-          ],
+              ElevatedButton(
+                onPressed: () {
+                  // print(titleInput);
+                  // print(amountInput);
+                  print(_titleController.text);
+                  print(_amountController.text);
+                  _submitData();
+                },
+                style: TextButton.styleFrom(
+                  primary: Colors.white,
+                ),
+                child: Text(
+                  'Add Transaction',
+                  style: TextStyle(fontFamily: 'Quicksand'),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
